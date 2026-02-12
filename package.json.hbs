@@ -1,35 +1,35 @@
 {
-    "name": "{{projectName}}",
-    "version": "0.4.0",
-    "private": true,
-    "type": "module",
-    "description": "Teliagen project: {{projectName}}",
-    "homepage": "https://docs.teliagen.org",
-    "scripts": {
-        "dev": "teliagen dev",
-        "build": "teliagen build",
-        "start": "teliagen start"
-    },
-    "dependencies": {
+"name": "{{projectName}}",
+"version": "0.4.2",
+"private": true,
+"type": "module",
+"description": "Teliagen project: {{projectName}}",
+"homepage": "https://docs.teliagen.org",
+"scripts": {
+"dev": "teliagen dev",
+"build": "teliagen build",
+"start": "teliagen start"
+},
+"dependencies": {
 {{#if storageEnabled}}
-        "@teliagen/plugin-storage": "{{teliagenVersion}}",
+"@teliagen/plugin-storage": "{{teliagenVersion}}",
 {{/if}}
 {{#if mailEnabled}}
-        "@teliagen/plugin-mail": "{{teliagenVersion}}",
+"@teliagen/plugin-mail": "{{teliagenVersion}}",
 {{/if}}
 {{#if playgroundEnabled}}
-        "@teliagen/plugin-playground": "{{teliagenVersion}}",
+"@teliagen/plugin-playground": "{{teliagenVersion}}",
 {{/if}}
-        "@teliagen/build": "{{teliagenVersion}}",
-        "@teliagen/commons": "{{teliagenVersion}}",
-        "@teliagen/logger": "{{teliagenVersion}}",
-        "@teliagen/server": "{{teliagenVersion}}",
-        "dotenv": "^17.2.3",
-        "reflect-metadata": "^0.2.0",
-        "tsx": "^4.21.0"
-    },
-    "devDependencies": {
-        "@types/node": "^22.0.0",
-        "typescript": "^5.7.0"
-    }
+"@teliagen/build": "{{teliagenVersion}}",
+"@teliagen/commons": "{{teliagenVersion}}",
+"@teliagen/logger": "{{teliagenVersion}}",
+"@teliagen/server": "{{teliagenVersion}}",
+"dotenv": "^17.2.3",
+"reflect-metadata": "^0.2.0",
+"tsx": "^4.21.0"
+},
+"devDependencies": {
+"@types/node": "^22.0.0",
+"typescript": "^5.7.0"
+}
 }
