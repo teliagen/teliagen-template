@@ -1,0 +1,25 @@
+/**
+* Teliagen Plugins Configuration
+*/
+
+{{#if storageEnabled}}
+import { storagePlugin } from './storage.plugin.js';
+{{/if}}
+{{#if mailEnabled}}
+import { mailPlugin } from './mail.plugin.js';
+{{/if}}
+{{#if playgroundEnabled}}
+import { playgroundPlugin } from './playground.plugin.js';
+{{/if}}
+
+export const appPlugins = [
+{{#if storageEnabled}}
+storagePlugin,
+{{/if}}
+{{#if mailEnabled}}
+mailPlugin,
+{{/if}}
+{{#if playgroundEnabled}}
+playgroundPlugin,
+{{/if}}
+];

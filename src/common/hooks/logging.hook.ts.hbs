@@ -1,0 +1,12 @@
+import { RequestContext } from '@teliagen/commons/types';
+import { Logger } from '@teliagen/logger';
+
+export class LoggingHook {
+     async handle(context: RequestContext) {
+          const action = context.action;
+          Logger.info('LoggingHook', `Executing action: ${action?.name || 'Unknown Action'}`);
+          if (context.result) {
+               Logger.info('LoggingHook', `Action result: ${context.result}`);
+          }
+     }
+}

@@ -1,0 +1,10 @@
+import { RequestContext } from '@teliagen/commons/types';
+import { Logger } from '@teliagen/logger';
+
+export class HelloValidationHook {
+     async handle(context: RequestContext) {
+          Logger.info('HelloValidationHook', 'Validating hello action...');
+          context.data = context.data || {};
+          context.data.startTime = Date.now();
+     }
+}

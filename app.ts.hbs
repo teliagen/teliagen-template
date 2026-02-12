@@ -1,0 +1,45 @@
+import 'reflect-metadata';
+import { loadConfig } from '@teliagen/commons/config';
+import { InputControl, OutputControl } from '@teliagen/commons/features';
+import { Logger } from '@teliagen/logger';
+import { TeliagenApp } from '@teliagen/server/app';
+import { HelloActions } from './src/modules/hello/actions/hello.actions';
+import { HelloService } from './src/modules/hello/services/hello.service';
+
+import { appPlugins } from './src/plugins/index';
+
+import { configDotenv } from "dotenv"
+configDotenv()
+
+export async function createApp() {
+     Logger.info('App', 'Starting createApp...');
+     const { config } = await loadConfig();
+     Logger.info('App', 'Config loaded:', config.server?.name);
+
+     const app = new TeliagenApp();
+
+
+     // Features
+     app.use(InputControl({
+          abortEarly: false,
+          unknownFields: "error",
+          validate: true
+     }));
+     app.use(OutputControl({
+          enabled: true,
+          filterBySchema: true
+     }));
+
+     // Modules(Optional)
+     app.registerModule({
+          actions: [HelloActions],
+          services: [HelloService]
+     });
+
+
+     await app.registerPlugins(appPlugins);
+
+
+
+     return app;
+}

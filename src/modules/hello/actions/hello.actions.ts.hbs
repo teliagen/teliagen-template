@@ -1,0 +1,41 @@
+import { ActionProvider, Action, Input, Output, BeforeAction, AfterAction, Ctx } from '@teliagen/commons/actions/decorators';
+import { Res } from '@teliagen/commons/actions/response';
+import { GreetInput, OutputSchema } from '../schemas/hello.schema';
+import { LoggingHook } from '../../../common/hooks/logging.hook';
+import { HelloValidationHook } from '../hooks/hello_validation.hook';
+import { RequestContext } from '@teliagen/commons/types';
+import { Logger } from '@teliagen/logger';
+
+import { Inject } from '@teliagen/commons/di';
+import { HelloService } from '../services/hello.service';
+
+@ActionProvider({
+     module: 'hello',
+     name: 'HelloActions'
+})
+export class HelloActions {
+     constructor(
+          @Inject(HelloService) private helloService: HelloService
+     ) { }
+
+     @Action({
+          name: 'HelloWorld',
+     })
+     @BeforeAction([LoggingHook])
+     @Output(OutputSchema)
+     async helloWorld() {
+          return { message: 'Hello from Teliagen! ' };
+     }
+
+     @Action({
+          name: 'Greet',
+     })
+     @BeforeAction([HelloValidationHook])
+     @Output(OutputSchema, { exclude: ['startTime'] })
+     async greet(@Input(GreetInput) input: GreetInput, @Ctx() ctx: RequestContext) {
+          const startTime = new Date(ctx.data.startTime);
+          const message = this.helloService.getGreeting(input.name);
+
+          return Res.json({ message: `${message} : ${startTime.toLocaleString()}`, startTime: startTime.toLocaleString() });
+     }
+}

@@ -1,0 +1,13 @@
+import { Service } from '@teliagen/commons/di';
+import { Logger } from '@teliagen/logger';
+
+@Service()
+export class HelloService {
+     constructor() {
+          Logger.info('HelloService', 'Initialized');
+     }
+
+     getGreeting(name: string): string {
+          return `Hello from HelloService, ${name}!`;
+     }
+}

@@ -1,0 +1,14 @@
+import { String } from "@teliagen/commons/validation/decorators";
+import { Schema } from "@teliagen/commons/schemas/decorator";
+
+@Schema()
+export class GreetInput {
+    @String({ required: true, min: 3, max: 50, message: 'Name must be between 3 and 50 characters' })
+    name!: string;
+}
+
+@Schema()
+export class OutputSchema {
+    @String({ required: true })
+    message!: string;
+}
